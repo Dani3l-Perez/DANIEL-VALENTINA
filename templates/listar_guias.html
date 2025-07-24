@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Guías de Aprendizaje</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
+    <style>
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        td a img {
+            width: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem;">
+        <h2 style="margin: 0 auto;">Listado de Guías de Aprendizaje</h2>
+        <a href="{{ url_for('cerrar_sesion') }}" 
+           style="background-color: crimson; color: white; padding: 0.5rem 1rem; border-radius: 5px; text-decoration: none;">
+            Cerrar sesión
+        </a>
+    </div>
+
+    <table style="width: 90%; margin: auto; border-collapse: collapse; font-family: Arial, sans-serif;">
+        <thead>
+            <tr style="background-color: #007BFF; color: white;">
+                <th style="padding: 8px;">Nombre Guía</th>
+                <th style="padding: 8px;">Descripción</th>
+                <th style="padding: 8px;">Programa</th>
+                <th style="padding: 8px;">Instructor</th>
+                <th style="padding: 8px;">Regional</th>
+                <th style="padding: 8px;">Fecha</th>
+                <th style="padding: 8px;">Ver PDF</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for guia in guias %}
+            <tr style="text-align: center; border-bottom: 1px solid #ccc;">
+                <td style="padding: 8px;">{{ guia.nombre_guia }}</td>
+                <td style="padding: 8px;">{{ guia.descripcion }}</td>
+                <td style="padding: 8px;">{{ guia.programa_formacion.nombre }}</td>
+                <td style="padding: 8px;">{{ guia.instructor.nombre_completo }}</td>
+                <td style="padding: 8px;">{{ guia.instructor.regional }}</td>
+                <td style="padding: 8px;">{{ guia.fecha_subida.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td style="padding: 8px;">
+                    <a href="{{ url_for('ver_pdf', nombre_archivo=guia.archivo_pdf) }}" target="_blank">
+                        <img src="{{ url_for('static', filename='img/pdf-icon.png') }}" alt="Ver PDF" width="24">
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

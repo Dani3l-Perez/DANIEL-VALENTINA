@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir Guía de Aprendizaje</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos2.css') }}">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <div class="barra-superior">
+            <a href="{{ url_for('cerrar_sesion') }}" class="boton boton-rojo">Cerrar sesión</a>
+            <a href="{{ url_for('listar_guias') }}" class="boton boton-azul">Ver listado de guías</a>
+        </div>
+
+        <div class="formulario">
+            <h2>Subir Guía de Aprendizaje</h2>
+            <form method="POST" enctype="multipart/form-data">
+                <label for="nombre">Nombre de la Guía:</label>
+                <input type="text" name="nombre" id="nombre" required>
+
+                <label for="descripcion">Descripción:</label>
+                <input type="text" name="descripcion" id="descripcion" required>
+
+                <label for="programa">Programa de Formación:</label>
+                <select name="programa" id="programa" required>
+                    <option value="" disabled selected>Selecciona un programa</option>
+                    {% for programa in programas %}
+                        <option value="{{ programa.id }}">{{ programa.nombre }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="archivo">Archivo PDF:</label>
+                <input type="file" name="archivo" id="archivo" accept=".pdf" required>
+
+                <button type="submit" class="boton boton-verde">Subir Guía</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

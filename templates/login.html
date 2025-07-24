@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if modo == 'iniciar' %}Iniciar Sesión{% else %}Registrarse{% endif %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+
+</head>
+<body>
+
+    <div class="formulario">
+        <h2>
+            {% if modo == 'iniciar' %}
+                Iniciar Sesión
+            {% else %}
+                Registrarse
+            {% endif %}
+        </h2>
+
+        <form method="POST">
+            {% if modo == 'registrar' %}
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="correo" required>
+
+                <label for="regional">Regional:</label>
+                <select id="regional" name="regional" required>
+                    <option value="" disabled selected>Selecciona una regional</option>
+                    {% for region in regionales %}
+                        <option value="{{ region }}">{{ region }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">Registrarse</button>
+
+                <a href="{{ url_for('iniciarSesion') }}">¿Ya tienes cuenta? Inicia sesión aquí</a>
+
+            {% elif modo == 'iniciar' %}
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="correo" required>
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Ingresar</button>
+
+                <a href="{{ url_for('registrarse') }}">¿No tienes cuenta? Regístrate aquí</a>
+            {% endif %}
+        </form>
+    </div>
+
+</body>
+</html>

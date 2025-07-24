@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: guia-aprendizaje-sena
+    env: python
+    region: oregon  # puedes cambiarlo a ohio o frankfurt si prefieres
+    plan: free
+
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: MONGO_URI
+        value: "TU_URI_DE_MONGODB_AQUI"
+      - key: SECRET_KEY
+        value: "clave_secreta_segura"

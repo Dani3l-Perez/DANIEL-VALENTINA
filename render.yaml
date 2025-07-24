@@ -12,6 +12,6 @@ services:
       - key: FLASK_ENV
         value: production
       - key: MONGO_URI
-        value: "TU_URI_DE_MONGODB_AQUI"
+        value: "mongodb+srv://adminSena:CTPIADSO@cluster0.tzgka8b.mongodb.net/guiasDB?retryWrites=true&w=majority&appName=Cluster0"
       - key: SECRET_KEY
         value: "clave_secreta_segura"
